@@ -1,6 +1,5 @@
-Hllo World
+Hello World
 nihao
 cao
 sa
-Fuck
-#
+fuck
