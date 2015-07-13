@@ -19,7 +19,7 @@ POST /api/ufops
 
 ```js
 {
-    "code": 200,
+   "code": 200,
 }
 ```
 
@@ -42,9 +42,9 @@ GET /api/ufops
 
 ```js
 {
-    "code": 200
-    "data":
-    [
+   "code": 200
+   "data":
+   [
       {
         "name": "testzy_123",
         "aclMode":"0"
@@ -55,7 +55,7 @@ GET /api/ufops
         "aclMode":"1"
         "desc":"这是Ufop的描述"
       }
-    ]
+   ]
 }
 ```
 
@@ -77,7 +77,7 @@ POST /api/images
 
 ```js
 {
-    "code": 200
+   "code": 200
 }
 ```
 
@@ -92,16 +92,16 @@ ResultError     Code = 500 // 请求结果发生错误
 请求
 
 ```js
-POST /api/ufops/:id/versions
+GET /api/ufops/:id/versions
 ```
 
 结果
 
 ```js
 {
-    "code": 200
-    "data":
-    [
+   "code": 200
+   "data":
+   [
       {
         "version":"v1.1",
         "state":"build success",
@@ -117,7 +117,7 @@ POST /api/ufops/:id/versions
         "state":"build success",
         "createAt":"2015-06-25 17:27:10"
       }
-    ]
+   ]
 }
 ```
 
@@ -133,28 +133,32 @@ ResultError     Code = 500 // 请求结果发生错误
 请求
 
 ```js
-POST /api/ufops/:id/instances
+GET /api/ufops/:id/instances
 ```
 
 结果
 
 ```js
 {
-    "code": 200
-    "data":
-    [
+   "code": 200
+   "data":
+   [
       {
-        ""
-        "version":"v1.0"
-        ""
+        "index":"1",
+        "version":"v1.1",
+        "state":"Stopped"
       },
       {
-        "name":"ufop2"
+        "index":"2",
+        "version":"v1.1",
+        "state":"Running"
       },
       {
-        "name":"ufop3"
+        "index":"3",
+        "version":"v1.0",
+        "state":"Running"
       }
-    ]
+   ]
 }
 ```
 
@@ -165,3 +169,112 @@ UfopNotfound    Code = ?//待定
 ResultError     Code = 500 // 请求结果发生错误
 ```
 
+###6. POST /api/ufops/:id/instances/:id/start(启用一个ufop实例)
+
+请求
+
+```js
+POST /api/ufops/:id/instances/:id/start
+```
+
+结果
+
+```js
+{
+    "code": 200
+    "data":
+   {
+        "index":"1",
+        "version":"v1.1",
+        "state":"Stopped"
+   }
+    
+}
+```
+
+错误
+
+```js
+UfopNotfound    Code = ?//待定
+ResultError     Code = 500 // 请求结果发生错误
+```
+
+###7. POST /api/ufops/:id/instances/:id/stop(停用一个ufop实例)
+
+请求
+
+```js
+POST /api/ufops/:id/instances/:id/stop
+```
+
+结果
+
+```js
+{
+    "code": 200
+    "data":
+   {
+        "index":"1",
+        "version":"v1.1",
+        "state":"Stopped"
+   }
+    
+}
+```
+
+错误
+
+```js
+UfopNotfound    Code = ?//待定
+ResultError     Code = 500 // 请求结果发生错误
+```
+
+###8. POST /api/ufops/:id/instances(添加ufop实例)
+
+请求
+
+```js
+POST /api/ufops/:id/instances
+
+{
+   "size":"3"   
+   "version":"v1.0"
+}
+
+//得先切换到对应版本才能添加那个版本的实例
+```
+
+结果
+
+```js
+{
+    "code": 200
+    "data":
+   [
+      {
+        "index":"1",
+        "version":"v1.1",
+        "state":"Stopped"
+      },
+      {
+        "index":"2",
+        "version":"v1.1",
+        "state":"Running"
+      },
+      {
+        "index":"3",
+        "version":"v1.0",
+        "state":"Running"
+      }
+   ]
+    
+}
+```
+
+错误
+
+```js
+InvalidArgs     Code = 400 // 请求参数错误，或者数据未通过验证
+ResultError     Code = 500 // 请求结果发生错误
+UfopNotfound    Code = ?//待定
+```
