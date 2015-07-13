@@ -181,8 +181,8 @@ POST /api/ufops/:id/instances/:id/start
 
 ```js
 {
-    "code": 200
-    "data":
+   "code": 200
+   "data":
    {
         "index":"1",
         "version":"v1.1",
@@ -211,8 +211,8 @@ POST /api/ufops/:id/instances/:id/stop
 
 ```js
 {
-    "code": 200
-    "data":
+   "code": 200
+   "data":
    {
         "index":"1",
         "version":"v1.1",
@@ -229,7 +229,36 @@ UfopNotfound    Code = ?//待定
 ResultError     Code = 500 // 请求结果发生错误
 ```
 
-###8. POST /api/ufops/:id/instances(添加ufop实例)
+###8. POST /api/ufops/:id/instances/:id/reboot(重启某一实例号的ufop实例)
+
+请求
+
+```js
+POST /api/ufops/:id/instances/:id/reboot
+```
+
+结果
+
+```js
+{
+   "code": 200
+   "data":
+   {
+        "index":"1",
+        "version":"v1.1",
+        "state":"Stopped"
+   }
+}
+```
+
+错误
+
+```js
+ResultError     Code = 500 // 请求结果发生错误
+UfopNotfound    Code = ? // Code待定，Ufop删除失败
+```
+
+###9. POST /api/ufops/:id/instances(添加ufop实例)
 
 请求
 
@@ -248,8 +277,8 @@ POST /api/ufops/:id/instances
 
 ```js
 {
-    "code": 200
-    "data":
+   "code": 200
+   "data":
    [
       {
         "index":"1",
@@ -278,3 +307,77 @@ InvalidArgs     Code = 400 // 请求参数错误，或者数据未通过验证
 ResultError     Code = 500 // 请求结果发生错误
 UfopNotfound    Code = ?//待定
 ```
+
+##10. DELETE /api/ufops/:id/instances/:id(删除某一实例号的ufop实例)
+
+请求
+
+```js
+DELETE /api/ufops/:id/instances/:id
+```
+
+结果
+
+```js
+{
+   "code": 200
+}
+```
+
+错误
+
+```js
+ResultError     Code = 500 // 请求结果发生错误
+UfopNotfound    Code = ? // Code待定，Ufop删除失败
+```
+
+###11. POST /api/ufops/:id/instances/:id/switch(切换到当前ufop实例)
+
+请求
+
+```js
+POST /api/ufops/:id/instances/:id/switch
+```
+
+结果
+
+```js
+{
+   "code": 200
+}
+```
+
+错误
+
+```js
+ResultError     Code = 500 // 请求结果发生错误
+UfopNotfound    Code = ?//待定
+```
+
+###12. GET /api/ufops/:id/instances/:id/log(查看某一个运行的ufop实例的日志)
+
+请求
+
+```js
+GET /api/ufops/:id/instances/:id/log
+```
+
+结果
+
+```js
+{
+   "code": 200
+   "data":
+   {
+      "log":"2015-07-13 [INFO] start up successfully"
+   }
+}
+```
+
+错误
+
+```js
+ResultError     Code = 500 // 请求结果发生错误
+UfopNotfound    Code = ?//待定
+```
+
