@@ -49,8 +49,8 @@ DELETE /api/ufops/:id
 错误
 
 ```js
-InvalidArgs     Code = 400 // 请求参数错误，或者数据未通过验证
 ResultError     Code = 500 // 请求结果发生错误
+UfopNotfound    Code = ?//待定
 ```
 
 ###3. GET /api/ufops/:id(查询一个Ufop的详细信息)
@@ -85,6 +85,7 @@ GET /api/ufops/:id
 
 ```js
 ResultError     Code = 500 // 请求结果发生错误
+UfopNotfound    Code = ?//待定
 ```
 
 
